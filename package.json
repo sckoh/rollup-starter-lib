@@ -1,6 +1,6 @@
 {
   "name": "redux-form-validate-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/main.js",
   "dependencies": {
     "redux-form": "^8.2.0"
