@@ -26,12 +26,22 @@ export const shouldError = customShouldError => (config) => {
   return false;
 };
 
+const countDecimals = (value) => {
+  if (value % 1 !== 0) {
+    return value.toString().split('.')[1].length;
+  }
+  return 0;
+};
+
 export const normalizeDecimal = decimalPoint => (value) => {
   if (!value || !value.length || value[value.length - 1] === '.') {
     return value;
   }
   // eslint-disable-next-line no-restricted-globals
   if (!isNaN(value)) {
+    if (countDecimals(parseFloat(value)) <= decimalPoint) {
+      return value;
+    }
     const factor = decimalPoint > 0 ? Big(10).pow(decimalPoint) : 1;
     return Big(value)
       .times(factor)
